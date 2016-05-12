@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-webmvc:3.1.1.RELEASE'
+    compile 'org.springframework:spring-jdbc:3.1.1.RELEASE'
+    compile 'org.mybatis:mybatis-spring:1.2.5'
+    compile 'org.mybatis:mybatis:3.3.1'
+    compile 'commons-dbcp:commons-dbcp:1.2.2'
+    compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+    compile 'org.slf4j:slf4j-api:1.7.14'
+
+    testCompile 'junit:junit:4.12'
+}
+
+gretty {
+    port = 8080
+    contextPath = '/'
+    servletContainer = 'jetty9'
+}
+
+task copyTask(type: Copy) {
+    copy{
+        from ('src/main/java/org/ssm/dao'){
+            include '**/*.xml'
+        }
+        into 'build/classes/main/org/ssm/dao'
+    }
+}

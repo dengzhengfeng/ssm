@@ -1,0 +1,7 @@
+*.swp
+ssm.iml
+/gradle/
+/build/
+/.idea/
+/.gradle/
+/gradle/
